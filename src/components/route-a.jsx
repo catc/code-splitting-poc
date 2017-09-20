@@ -8,22 +8,31 @@ export default class RouteA extends Component {
 
 		console.log( 'Route A constructor' )
 
-		import(
-			/* webpackChunkName: "comp-abc" */
-			/* webpackMode: "lazy" */
-			'./comp-abc.jsx'
-		).then(comp => {
-			Comp = comp;
+		// works - splits chunk into separate file on build
+		/*require.ensure('./comp-abc.jsx', (comp) => {
+			Comp = require('./comp-abc.jsx').default;
 			this.setState({doneLoading: true})
-		}).catch(err => {
-			console.log( 'error importing', err )
+		})*/
+
+		// doesn't work - chunk is not a separate file on build
+		import('./comp-abc.jsx').then(comp => {
+			Comp = comp.default
+			this.setState({doneLoading: true})
 		})
+
+		// works - splits chunk into separate file on build
+		/*require.ensure('./comp-abc.jsx', () => {
+			import('./comp-abc.jsx').then(comp => {
+				Comp = comp.default
+				this.setState({doneLoading: true})
+			})
+		})*/
 	}
 
 	render(){
 		return (
 			<div>this is <strong>Route A</strong>
-			{this.state.doneLoading ? <Comp.default/>: 'still loading...'}
+			{this.state.doneLoading ? <Comp/>: 'still loading...'}
 			</div>
 		)
 	}
