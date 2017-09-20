@@ -5,7 +5,7 @@
 	],
 	"plugins": [
 		'transform-runtime',
-		"dynamic-import-node",
+		'syntax-dynamic-import',
 		'transform-regenerator',
 		'transform-decorators-legacy',
 		'transform-class-properties',

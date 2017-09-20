@@ -16,6 +16,8 @@ export default class RouteA extends Component {
 
 		// doesn't work - chunk is not a separate file on build
 		import('./comp-abc.jsx').then(comp => {
+			/* webpackMode: "lazy" */
+			/* webpackChunkName: "comp-abc" */
 			Comp = comp.default
 			this.setState({doneLoading: true})
 		})

@@ -68,7 +68,8 @@ webpack(config, (err, stats) => {
 	console.log(`${br}\n`, stats.toString({
 		chunks: true,
 		colors: true,
-		hash: true
+		modules: false,
+		chunkModules: false
 	}))
 
 	copyHTML();
